@@ -1,0 +1,114 @@
+<script>
+
+
+    function userPlay(){
+
+        const validPlays = ['rock', 'paper', 'scissors'];
+
+        let play = '';
+
+        while ( !(validPlays.includes(play.toLowerCase()))){
+            play = prompt("What's your play?");
+            if(!validPlays.includes(play.toLowerCase())){
+                window.alert('Your play is not valid. Try again.');
+            }
+
+        }
+
+        return play;
+        
+
+    }
+
+    function computerPlay(){
+
+        const plays = ['rock', 'paper', 'scissors'];
+
+        let random = Math.floor( Math.random() * plays.length );
+       
+        let play=plays[random];
+
+        return play;
+
+    }
+
+    function playRound(playerSelection, computerSelection){
+        
+        let result;
+
+        // let score = [
+        //     ['player', 0],
+        //     ['computer', 0]
+        // ];
+
+        if(playerSelection=='rock' && computerSelection=='rock'){
+            result = 'Tie!';
+        } else if(playerSelection=='rock' && computerSelection=='paper'){
+            result = 'The computer Won. Paper beats Rock!'
+        } else if(playerSelection=='rock' && computerSelection=='scissors'){
+            result = 'The player Won. Rock beats Scissors!'
+        } else if(playerSelection=='paper' && computerSelection=='rock'){
+            result = 'The player Won. Paper beats Rock!';
+        } else if(playerSelection=='paper' && computerSelection=='paper'){
+            result = 'Tie!'
+        } else if(playerSelection=='paper' && computerSelection=='scissors'){
+            result = 'The computer Won. Scissors beats Paper!'
+        } else if(playerSelection=='scissors' && computerSelection=='rock'){
+            result = 'The computer Won. Rock beats Scissors!';
+        } else if(playerSelection=='scissors' && computerSelection=='paper'){
+            result = 'The computer Won. Paper beats Scissors!'
+        } else if(playerSelection=='scissors' && computerSelection=='scissors'){
+            result = 'Tie!'
+        }
+
+        return result;
+
+    }
+
+
+    function game(){
+
+        let numberOfPlays = 5;
+
+        let playerScore = 0;
+        let computerScore = 0;
+
+        for(let i = 0; i < numberOfPlays; i++){
+
+            let playerSelection = userPlay();
+            let computerSelection = computerPlay();
+
+            let message = playRound(playerSelection, computerSelection);
+
+            if(message.includes('computer')){
+                computerScore++;
+            }
+            if(message.includes('player')){
+                playerScore++;
+            }
+
+            window.alert(message);
+
+        }
+
+
+        if(playerScore > computerScore){
+            window.alert("The player won. \n Computer Score: "+computerScore+" \n Player Score: "+ playerScore +" ");
+        }
+
+        if(playerScore < computerScore){
+            window.alert("The computer won. \n Computer Score: "+computerScore+" \n Player Score: "+ playerScore +" ");
+        }
+
+        if(playerScore == computerScore){
+            window.alert("Tie. \n Computer Score: "+computerScore+" \n Player Score: "+ playerScore +" ");
+        }
+
+    }
+    
+    window.onload = function(){
+        game()
+    };
+
+
+</script>
